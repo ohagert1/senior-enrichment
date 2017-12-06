@@ -12,6 +12,10 @@ const Campuses = require('./Campuses');
 
 // This is also probably a good place for you to set up your associations
 
-Student.belongsTo(Campus, {as: 'campus'});
+Students.belongsTo(Campuses, {as: 'campus'});
 
-module.exports = db;
+module.exports = {
+  db,
+  Students,
+  Campuses
+};
