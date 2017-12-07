@@ -18,6 +18,6 @@ studentRouter.get('/:id', (req, res, next) => {
       res.send(data);
     })
     .catch(next);
-})
+});
 
 module.exports = studentRouter;

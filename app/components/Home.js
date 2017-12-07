@@ -1,9 +1,12 @@
 'use strict';
 
 import React, { Component } from 'react';
+import { Route, Switch } from 'react-router-dom';
 import {render} from 'react-dom';
 import store from '../store.js';
 import Header from './Header';
+import CampusList from './CampusList';
+import StudentsList from './StudentsList';
 
 export default class  Home extends Component {
 
@@ -17,9 +20,7 @@ export default class  Home extends Component {
   render() {
     return(
       <div>
-        <Header />
-        <h2>Campuses Here</h2>
-        <h2>Students Here</h2>
+        <h1>homepage pending</h1>
       </div>
     )
   }

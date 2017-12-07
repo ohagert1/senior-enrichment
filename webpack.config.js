@@ -6,7 +6,8 @@ module.exports = {
   entry: './app/main',
   output: {
     path: __dirname,
-    filename: './public/bundle.js'
+    filename: './public/bundle.js',
+    publicPath: '/'
   },
   context: __dirname,
   devtool: 'source-map',
@@ -24,5 +25,8 @@ module.exports = {
         }
       }
     ]
-  }
+  },
+    devServer: {
+    historyApiFallback: true,
+  },
 };

@@ -20,9 +20,10 @@ app.use(express.static(path.join(__dirname, '../public')));
 
 app.use('/', router); // include our routes!
 
+//Commented out, was getting error "cannor set headers after they are sent"
+
 app.get('*', (req, res, next) => {
   res.sendFile(path.join(__dirname, '../public/index.html'));
-  next();
 }); // Send index.html for any other requests
 
 //error handling middleware
