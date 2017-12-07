@@ -9,13 +9,24 @@ import { combineReducers } from 'redux';
 const GET_CAMPUSES = 'GET_CAMPUSES';
 const GET_STUDENTS = 'GET_STUDENTS';
 
+const WRITE_CAMPUS = 'WRITE_CAMPUS';
+
 const initialState = {
   campuses: [],
-  students: []
+  students: [],
+  newCampus: {}
 };
 
 
 //ACTION CREATORS
+
+export function writeCampusName(newCampus) {
+  return {
+    type: WRITE_CAMPUS_NAME,
+    newCampus: newCampus
+  };
+}
+
 
 export function getCampuses(campuses) {
   return {
@@ -34,9 +45,15 @@ export function getStudents(students) {
 
 //THUNK CREATORS
 
+export function postCampusName () {
+  return function thunk(dispatch) {
+    axios.post('/api/addCampus')
+  }
+}
+
 export function fetchCampuses () {
   return function thunk(dispatch) {
-    return axios.get('/api/campuses')
+    axios.get('/api/campuses')
     .then(res => res.data)
     .then(campuses => {
       const action = getCampuses(campuses);
@@ -47,7 +64,7 @@ export function fetchCampuses () {
 
 export function fetchStudents () {
   return function thunk(dispatch) {
-    return axios.get('/api/students')
+    axios.get('/api/students')
     .then(res => res.data)
     .then(students => {
       const action = getStudents(students);
@@ -73,10 +90,15 @@ export default function rootReducer(state = initialState, action) {
       newState.students = newState.students.concat(action.students);
       return newState;
 
+    case WRITE_CAMPUS:
+      newState.newCampus = action.newCampus;
+      return newState;
+
     default:
       return state;
   }
-};
+
+}
 
 
 

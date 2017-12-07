@@ -2,7 +2,7 @@
 
 import React, { Component } from 'react';
 import {render} from 'react-dom';
-import { Provider, connect } from 'react-redux';
+import { connect } from 'react-redux';
 import store from '../store';
 import { NavLink } from 'react-router-dom';
 
@@ -21,7 +21,7 @@ class CampusList extends Component {
           return(
             <li key={campus.id} style={{paddingBottom: 5 + "%"}}>
               <div>
-                <img src={campus.imageUrl} style={{width: 50 + '%'}}/>
+                <img src={campus.imageUrl} style={{width: 25 + '%'}}/>
                 <NavLink to={`/campuses/${campus.id}`}>
                   <h3>{campus.name}</h3>
                 </NavLink>
