@@ -37,7 +37,7 @@ const WRITE_CAMPUS = 'WRITE_CAMPUS';
 //UPDATE CAMPUS
 
 const UPDATE_CAMPUS = 'UPDATE_CAMPUS';
-
+const UPDATE_STUDENT = 'UPDATE_STUDENT';
 
 
 //INITIAL STATE
@@ -153,6 +153,12 @@ export function updateCampus(campus) {
   };
 }
 
+export function updateStudent(student) {
+  return {
+    type: UPDATE_STUDENT,
+    student: student
+  };
+}
 
 
 //THUNK CREATORS
@@ -194,11 +200,22 @@ export function putCampusUpdate (campus, history) {
     .then(campus => {
       const action = updateCampus(campus);
       dispatch(action);
-      history.push(`/campuses/${newCampus.id}`);
+      history.push(`/campuses/${campus.id}`);
     });
   };
 }
 
+export function putStudentUpdate (student, history) {
+  return function thunk(dispatch) {
+    axios.put('/api/students', student) //not student maybe? nested?
+    .then(res => res.data)
+    .then(student => {
+      const action = updateStudent(student);
+      dispatch(action);
+      history.push(`/students/${student.id}`);
+    });
+  };
+}
 
 //AJAX (FETCH)
 
@@ -290,14 +307,18 @@ export default function rootReducer(state = initialState, action) {
       return newState;
 
     case UPDATE_CAMPUS:
-      newState.campuses = newState.campuses.forEach((campus) => {
-        if(campus.id === action.campus.id) {
-          campus = action.campus;
-        }
+      let campus = newState.campuses.find((campus) => {
+        return campus.id == action.campus.id
       })
+      campus = action.campus
       return newState;
 
-
+    case UPDATE_STUDENT:
+      let student = newState.students.find((student) => {
+        return student.id == action.student.id
+      })
+      student = action.student
+      return newState;
 
     default:
       return state;

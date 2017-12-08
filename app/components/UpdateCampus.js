@@ -1,34 +1,50 @@
 import { Component } from 'react';
 import { connect } from 'react-redux';
-import store, { postNewCampus, writeCampusName, writeCampusDescription, writeCampusImage } from '../store';
+import store, { putCampusUpdate } from '../store';
 import React from 'react';
 
-class UpdateCampus extends Component {
+export default class UpdateCampus extends Component {
 
   constructor(props) {
     super(props);
+    this.onNameChange = this.onNameChange.bind(this);
+    this.onDescriptionChange = this.onDescriptionChange.bind(this);
+    this.onImageChange = this.onImageChange.bind(this);
+    this.onSubmit = this.onSubmit.bind(this);
   }
 
-  componentDidMount() {
+  onNameChange(event) {
+    this.campus.name = event.target.value;
+  }
 
+  onDescriptionChange(event) {
+    this.campus.description = event.target.value;
+  }
+
+  onImageChange(event) {
+    this.campus.imageUrl = event.target.value;
+  }
+
+  onSubmit(event) {
+    event.preventDefault();
+    store.dispatch(putCampusUpdate(this.campus, this.props.history));
   }
 
   render() {
-    if(this.props.campuses.length) {
-      console.log('camp', this.props.campuses)
-      let campus = this.props.campuses.find((campus) => {
-        return campus.id == this.props.match.params.id;
-      });
+    this.campus = this.props.campuses.find((campus) => {
+      return campus.id == this.props.match.params.id;
+    });
+    if(this.campus) {
       return(
-        <form onSubmit={this.props.onSubmit}>
+        <form onSubmit={this.onSubmit}>
           <div className="form-group">
             <label>Campus Name:</label>
               <input
                 className="form-control"
                 type="text"
                 name="campusName"
-                value={campus.name}
-                onChange={this.props.onNameChange}
+                defaultValue={this.campus.name}
+                onChange={this.onNameChange}
               />
           </div>
           <div className="form-group">
@@ -37,12 +53,12 @@ class UpdateCampus extends Component {
                 className="form-control"
                 type="text"
                 name="campusDescription"
-                value={campus.description}
-                onChange={this.props.onDescriptionChange}
+                defaultValue={this.campus.description}
+                onChange={this.onDescriptionChange}
               />
           </div>
           <div>
-          <img src={campus.imageUrl} style={{width: 25 + '%'}}/>
+          <img src={this.campus.imageUrl} style={{width: 25 + '%'}}/>
           </div>
           <div className="form-group">
             <label>Campus Image URL:</label>
@@ -50,61 +66,14 @@ class UpdateCampus extends Component {
                 className="form-control"
                 type="text"
                 name="campusImage"
-                value={campus.imageUrl}
-                onChange={this.props.onImageChange}
+                defaultValue={this.campus.imageUrl}
+                onChange={this.onImageChange}
               />
           </div>
-          <button type="submit">Submit</button>
+          <button type="submit">Submit Changes</button>
         </form>
       );
     }
     return null;
   }
 }
-
-function mapStateToProps(state, ownProps) {
-  console.log('ownProps',ownProps)
-
-  return {
-
-    campuses: state.campuses,
-    campusName: state.newCampus.name,
-    campusDescription: state.newCampus.description,
-    campusImage: state.newCampus.imageUrl,
-    history: ownProps.history
-
-  }
-}
-
-function mapDispatchToProps(dispatch, ownProps) {
-  return {
-    onSubmit: (event) => {
-      event.preventDefault();
-      dispatch(putCampusUpdate({
-        campus: {
-          name: event.target.campusName.value,
-          description: event.target.campusDescription.value,
-          imageUrl: event.target.campusImage.value
-        }
-      },
-      ownProps.history
-      ))
-    },
-    onNameChange: (event) => {
-      event.preventDefault();
-      dispatch(writeCampusName(event.target.value))
-    },
-    onDescriptionChange: (event) => {
-      event.preventDefault();
-      dispatch(writeCampusDescription(event.target.value))
-    },
-    onImageChange: (event) => {
-      event.preventDefault();
-      dispatch(writeCampusImage(event.target.value))
-    }
-  }
-}
-
-const UpdateCampusContainer = connect(mapStateToProps, mapDispatchToProps)(UpdateCampus)
-
-export default UpdateCampusContainer;

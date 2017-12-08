@@ -29,4 +29,19 @@ studentRouter.get('/:id', (req, res, next) => {
     .catch(next);
 });
 
+studentRouter.put('/', (req, res, next) => {
+  Students.update(req.body, {
+    where: {id: req.body.id},
+    returning: true,
+    plain: true
+  })
+  .spread((rows, student) => res.json(student))
+  .catch(next);
+});
+
+studentRouter.delete('/', (req, res, next) => {
+  Students.destroy({where: {id: req.body.id}})
+  .catch(next);
+});
+
 module.exports = studentRouter;

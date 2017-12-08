@@ -12,6 +12,7 @@ import SingleCampus from './SingleCampus';
 import AddNewCampus from './AddNewCampus';
 import AddNewStudent from './AddNewStudent';
 import UpdateCampus from './UpdateCampus';
+import UpdateStudent from './UpdateStudent';
 import { Provider, connect } from 'react-redux';
 
 
@@ -44,15 +45,6 @@ class Main extends Component {
             }
             />
             <Route
-              path="/students/:id"
-              render={(props) => (
-                <SingleStudent {...props}
-                  students={this.props.students}
-                  campuses={this.props.campuses}
-                />)
-              }
-            />
-            <Route
               path="/campuses/add-new-campus"
               render={(props) => (
               <AddNewCampus {...props}
@@ -61,12 +53,34 @@ class Main extends Component {
             />
             <Route
               path="/campuses/:id/update"
-              component={UpdateCampus}
+              render={(props) => (
+                <UpdateCampus {...props}
+                  campuses = {this.props.campuses}
+                />)
+              }
+            />
+            <Route
+              path="/students/:id/update"
+              render={(props) => (
+                <UpdateStudent {...props}
+                  campuses = {this.props.campuses}
+                  students = {this.props.students}
+                />)
+              }
             />
             <Route
               path="/campuses/:id"
               render={(props) => (
                 <SingleCampus {...props}
+                  students={this.props.students}
+                  campuses={this.props.campuses}
+                />)
+              }
+            />
+            <Route
+              path="/students/:id"
+              render={(props) => (
+                <SingleStudent {...props}
                   students={this.props.students}
                   campuses={this.props.campuses}
                 />)
