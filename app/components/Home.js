@@ -10,27 +10,18 @@ import CampusList from './CampusList';
 import StudentsList from './StudentsList';
 
 
+const Home = () => {
 
-export default class  Home extends Component {
-
-
-//REFACTOR WITH REACT-REDUX
-  constructor(props) {
-    super(props);
-    this.state = store.getState();
-  }
-
-  render() {
-    return(
-      <div>
-        <NavLink to="/campuses">
-          <h2>Campuses</h2>
-        </NavLink>
-        <NavLink to="/students">
-          <h2>Students</h2>
-        </NavLink>
-      </div>
-    )
-  }
+  return(
+    <div>
+      <NavLink to="/campuses">
+        <h2>Campuses</h2>
+      </NavLink>
+      <NavLink to="/students">
+        <h2>Students</h2>
+      </NavLink>
+    </div>
+  )
 }
 
+export default Home;

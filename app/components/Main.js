@@ -9,13 +9,16 @@ import Header from './Header';
 import Footer from './Footer';
 import SingleStudent from './SingleStudent';
 import SingleCampus from './SingleCampus';
+import AddNewCampus from './AddNewCampus';
+import AddNewStudent from './AddNewStudent';
+import UpdateCampus from './UpdateCampus';
 import { Provider, connect } from 'react-redux';
 
 
 class Main extends Component {
 
-  constructor(props) {
-    super(props);
+  constructor() {
+    super();
   }
 
 
@@ -34,6 +37,13 @@ class Main extends Component {
         <main>
           <Switch>
             <Route
+              path="/students/add-new-student"
+              render={(props) => (
+              <AddNewStudent {...props}
+              />)
+            }
+            />
+            <Route
               path="/students/:id"
               render={(props) => (
                 <SingleStudent {...props}
@@ -42,10 +52,45 @@ class Main extends Component {
                 />)
               }
             />
-            <Route path="/campuses/:id" render={(props) => <SingleCampus {...props}/>}/>
-            <Route path="/students" render={(props) => <StudentsList {...props} students={this.props.students}/>}/>
-            <Route path="/campuses" component={CampusList} />
-            <Route path="/" component={Home} />
+            <Route
+              path="/campuses/add-new-campus"
+              render={(props) => (
+              <AddNewCampus {...props}
+              />)
+            }
+            />
+            <Route
+              path="/campuses/:id/update"
+              component={UpdateCampus}
+            />
+            <Route
+              path="/campuses/:id"
+              render={(props) => (
+                <SingleCampus {...props}
+                  students={this.props.students}
+                  campuses={this.props.campuses}
+                />)
+              }
+            />
+            <Route
+              path="/students"
+              render={(props) => (
+                <StudentsList {...props} students={this.props.students}
+                />)
+              }
+            />
+            <Route
+              path="/campuses"
+              render={(props) => (
+                <CampusList {...props} campuses={this.props.campuses}
+                />)
+              }
+            />
+            <Route
+              path="/"
+              component={Home}
+            />
+
           </Switch>
         </main>
         <Footer />

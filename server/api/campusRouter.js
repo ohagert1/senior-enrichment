@@ -13,6 +13,13 @@ campusRouter.get('/', (req, res, next) => {
     .catch(next);
 });
 
+campusRouter.post('/', (req, res, next) => {
+  console.log('req', req.body.newCampus)
+  Campuses.create(req.body.newCampus)
+  .then(campus => res.json(campus))
+  .catch(next);
+});
+
 campusRouter.get('/:id/students', (req, res, next) => {
   Students.findAll({where: {CampusId: req.params.id}})
     .then((data) => {
@@ -29,8 +36,6 @@ campusRouter.get('/:id', (req, res, next) => {
     .catch(next);
 });
 
-// campusRouter.post('/', (req, res, next) => {
-//   Campuses.findOrCreate()
-// })
+
 
 module.exports = campusRouter;

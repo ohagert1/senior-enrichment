@@ -3,12 +3,21 @@
 const studentRouter = require('express').Router();
 const db = require('../db/models');
 const Students = db.Students;
-
+const Campuses = db.Campuses;
 studentRouter.get('/', (req, res, next) => {
   Students.findAll()
     .then((data) => {
       res.json(data);
     })
+    .catch(next);
+});
+
+studentRouter.post('/', (req, res, next) => {
+  console.log(req.body);
+  let student = Students.build(req.body.newStudent);
+  student.setCampus(req.body.campus, { save: false });
+  student.save()
+    .then(student => res.json(student))
     .catch(next);
 });
 

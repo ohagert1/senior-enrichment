@@ -1,6 +1,7 @@
 import { Component } from 'react';
 import { connect } from 'react-redux';
-import { writeNewCampus } from '../store';
+import { postNewCampus, writeCampusName, writeCampusDescription, writeCampusImage } from '../store';
+import React from 'react';
 
 const AddNewCampus = (props) => {
   return(
@@ -12,6 +13,8 @@ const AddNewCampus = (props) => {
             type="text"
             name="campusName"
             placeholder="Enter Campus Name"
+            value={props.campusName}
+            onChange={props.onNameChange}
           />
       </div>
       <div className="form-group">
@@ -21,6 +24,8 @@ const AddNewCampus = (props) => {
             type="text"
             name="campusDescription"
             placeholder="Enter Campus Description"
+            value={props.campusDescription}
+            onChange={props.onDescriptionChange}
           />
       </div>
       <div className="form-group">
@@ -30,32 +35,54 @@ const AddNewCampus = (props) => {
             type="text"
             name="campusImage"
             placeholder="Paste Campus Image URL"
+            value={props.campusImage}
+            onChange={props.onImageChange}
           />
       </div>
+      <button type="submit">Submit</button>
     </form>
   );
 }
 
 function mapStateToProps(state, ownProps) {
+  console.log('ownProps',ownProps)
   return {
-    campusName: state.campusName,
-    newCampus: state.newCampus,
+    campusName: state.newCampus.name,
+    campusDescription: state.newCampus.description,
+    campusImage: state.newCampus.imageUrl,
     history: ownProps.history
   }
 }
 
 function mapDispatchToProps(dispatch, ownProps) {
   return {
-    onNameChange: (event) => {
-      dispatch(writeNewCampus({
+    onSubmit: (event) => {
+      event.preventDefault();
+      dispatch(postNewCampus({
         newCampus: {
           name: event.target.campusName.value,
           description: event.target.campusDescription.value,
           imageUrl: event.target.campusImage.value
         }
       },
-        ownProps.history
+      ownProps.history
       ))
+    },
+    onNameChange: (event) => {
+      event.preventDefault();
+      dispatch(writeCampusName(event.target.value))
+    },
+    onDescriptionChange: (event) => {
+      event.preventDefault();
+      dispatch(writeCampusDescription(event.target.value))
+    },
+    onImageChange: (event) => {
+      event.preventDefault();
+      dispatch(writeCampusImage(event.target.value))
     }
   }
 }
+
+const AddNewCampusContainer = connect(mapStateToProps, mapDispatchToProps)(AddNewCampus)
+
+export default AddNewCampusContainer;

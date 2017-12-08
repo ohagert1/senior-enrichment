@@ -5,18 +5,14 @@ import {render} from 'react-dom';
 import { Provider } from 'react-redux';
 import store from '../store';
 
-export default class Header extends Component {
+const Header = () => {
 
-  constructor(props) {
-    super(props);
-  }
-
-  render() {
-    return(
+  return(
     <div>
       <h1>Welcome to Fullstack Intergalactic</h1>
     </div>
-    )
-  }
+  )
 
 }
+
+export default Header;

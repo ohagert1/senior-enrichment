@@ -18,6 +18,7 @@ const Campuses = db.define('Campuses', {
   imageUrl: {
     type: Sequelize.STRING,
     isURL: true,
+    allowNull: false,
     defaultValue: 'https://www.binghamton.edu/admissions/img/hi-res/visit.jpg'
   },
 

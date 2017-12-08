@@ -4,10 +4,14 @@ import React, { Component } from 'react';
 import {render} from 'react-dom';
 import { Provider, connect } from 'react-redux';
 import store from '../store';
-import StudentsList from './StudentsList'
+import StudentsList from './StudentsList';
+import { withRouter } from 'react-router';
+import { NavLink } from 'react-router-dom';
 
 const SingleCampus = (props) => {
+
   let campus = props.campuses.find((campus) => campus.id == props.match.params.id);
+
   if(campus) {
     return(
       <div>
@@ -19,19 +23,13 @@ const SingleCampus = (props) => {
             return student.CampusId == campus.id
           })}
         />
+        <NavLink to={`/campuses/${campus.id}/update`}>
+        Edit Campus Info
+        </NavLink>
       </div>
     );
   }
   return null;
 };
 
-const mapStateToProps = (state) => {
-  return {
-    campuses: state.campuses,
-    students: state.students
-  }
-}
-
-const SingleCampusContainer = connect(mapStateToProps)(SingleCampus);
-
-export default SingleCampusContainer;
+export default SingleCampus;

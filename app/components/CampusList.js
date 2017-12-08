@@ -5,19 +5,17 @@ import {render} from 'react-dom';
 import { connect } from 'react-redux';
 import store from '../store';
 import { NavLink } from 'react-router-dom';
+import { withRouter } from 'react-router';
 
-class CampusList extends Component {
-
-  constructor(props) {
-    super(props);
-  }
-
-  render() {
+const CampusList = function(props) {
     return(
     <div>
       <h2>Campuses:</h2>
+      <NavLink to='/campuses/add-new-campus'>
+      Add New Campus
+      </NavLink>
       <ul style={{listStyle: 'none'}}>
-        {this.props.campuses.map((campus) => {
+        {props.campuses.map((campus) => {
           return(
             <li key={campus.id} style={{paddingBottom: 5 + "%"}}>
               <div>
@@ -34,15 +32,6 @@ class CampusList extends Component {
       </ul>
     </div>
     )
-  }
 }
 
-const mapStateToProps = (state) => {
-  return {
-    campuses: state.campuses
-  }
-}
-
-const CampusListContainer = connect(mapStateToProps)(CampusList);
-
-export default CampusListContainer;
+export default CampusList;

@@ -25,6 +25,4 @@ const StudentList = (props) => {
   )
 }
 
-//Remove and refactor the below, pass state via props?
-
 export default StudentList;

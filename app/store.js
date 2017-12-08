@@ -9,4 +9,4 @@ export default createStore(rootReducer, composeWithDevTools(applyMiddleware(thun
 
 //EXPORT THUNK CREATORS, ACTION CREATORS FROM REDUCER
 
-export * from './reducers'
+export * from './reducers';
