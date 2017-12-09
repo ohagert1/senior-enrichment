@@ -51,7 +51,7 @@ campusRouter.delete('/', (req, res, next) => {
     .catch(next);
   Campuses.destroy({where: {id: req.body.id}})
     .then(() => res.send('Deleted'))
-  .catch(next)
+  .catch(next);
   }
 );
 
