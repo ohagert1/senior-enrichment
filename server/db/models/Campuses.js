@@ -1,5 +1,6 @@
 const db = require('../');
 const Sequelize = require('sequelize');
+const Students = db.Students;
 
 const Campuses = db.define('Campuses', {
 
@@ -27,5 +28,6 @@ const Campuses = db.define('Campuses', {
   }
 
 });
+
 
 module.exports = Campuses;

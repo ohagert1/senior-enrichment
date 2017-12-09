@@ -3,33 +3,82 @@
 import React, { Component } from 'react';
 import {render} from 'react-dom';
 import { Provider, connect } from 'react-redux';
-import store from '../store';
+import store, { deleteCampus } from '../store';
 import StudentsList from './StudentsList';
-import { withRouter } from 'react-router';
 import { NavLink } from 'react-router-dom';
 
-const SingleCampus = (props) => {
+class SingleCampus extends Component {
 
-  let campus = props.campuses.find((campus) => campus.id == props.match.params.id);
-
-  if(campus) {
-    return(
-      <div>
-        <h3>{campus.name}</h3>
-        <img src={campus.imageUrl} style={{width: 50 + '%'}}/>
-        <p>{campus.description}</p>
-        <StudentsList
-          students={props.students.filter((student) => {
-            return student.CampusId == campus.id
-          })}
-        />
-        <NavLink to={`/campuses/${campus.id}/update`}>
-        Edit Campus Info
-        </NavLink>
-      </div>
-    );
+  constructor(props) {
+    super(props);
+    this.state = {
+      deleting: false
+    };
+    this.onDeleteClick = this.onDeleteClick.bind(this);
+    this.onCancel = this.onCancel.bind(this);
   }
-  return null;
+
+  onDeleteClick(event) {
+    this.setState({
+      deleting: true
+    });
+  }
+
+  onCancel(event) {
+    this.setState({
+      deleting: false
+    });
+  }
+
+  render() {
+    this.campus = this.props.campuses.find((campus) => campus.id == this.props.match.params.id);
+    if(this.campus) {
+      return(
+        <div>
+          <h3>{this.campus.name}</h3>
+          <img src={this.campus.imageUrl} style={{width: 50 + '%'}}/>
+          <p>{this.campus.description}</p>
+          <StudentsList
+            students={this.props.students.filter((student) => {
+              return student.CampusId == this.campus.id
+            })}
+          />
+          <NavLink to={`/campuses/${this.campus.id}/update`}>
+          Edit Campus Info
+          </NavLink>
+          <div>
+              <button onClick={this.onDeleteClick}>Delete Campus</button>
+            {
+              this.state.deleting && (
+                <div>
+                  <h4>Do you really want to delete {this.campus.name}?</h4>
+                  <button onClick={() => {
+                    this.props.onDeleteConfirm(this.campus)
+                  }}>Delete</button>
+                  <button onClick={this.onCancel}>Cancel</button>
+                </div>
+                )
+            }
+          </div>
+        </div>
+      );
+    }
+    return null;
+  }
 };
 
-export default SingleCampus;
+const mapStateToProps = (state) => {
+  return{}
+}
+
+const mapDispatchToProps = (dispatch, ownProps) => {
+  return {
+    onDeleteConfirm: (campus) => {
+      dispatch(deleteCampus(campus, ownProps.history))
+    }
+  }
+}
+
+const SingleCampusContainer = connect(mapStateToProps, mapDispatchToProps)(SingleCampus)
+
+export default SingleCampusContainer;

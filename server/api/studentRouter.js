@@ -40,7 +40,11 @@ studentRouter.put('/', (req, res, next) => {
 });
 
 studentRouter.delete('/', (req, res, next) => {
-  Students.destroy({where: {id: req.body.id}})
+  Students.findById(req.body.id)
+  .then((student) => {
+    return Students.destroy({where: {id: req.body.id}})
+    .then(() => res.send('Deleted'));
+  })
   .catch(next);
 });
 

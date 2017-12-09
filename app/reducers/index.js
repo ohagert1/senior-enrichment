@@ -40,6 +40,17 @@ const UPDATE_CAMPUS = 'UPDATE_CAMPUS';
 const UPDATE_STUDENT = 'UPDATE_STUDENT';
 
 
+
+//REMOVE STUDENT
+
+const REMOVE_STUDENT = 'REMOVE_STUDENT';
+
+
+
+//REMOVE CAMPUS
+
+const REMOVE_CAMPUS = 'REMOVE_CAMPUS';
+
 //INITIAL STATE
 
 const initialState = {
@@ -160,6 +171,19 @@ export function updateStudent(student) {
   };
 }
 
+export function removeStudent(student) {
+  return {
+    type: REMOVE_STUDENT,
+    student: student
+  };
+}
+
+export function removeCampus(campus) {
+  return {
+    type: REMOVE_CAMPUS,
+    campus:campus
+  };
+}
 
 //THUNK CREATORS
 
@@ -216,6 +240,32 @@ export function putStudentUpdate (student, history) {
     });
   };
 }
+
+
+
+//DELETE
+
+export function deleteStudent(student, history) {
+  return function thunk(dispatch) {
+    const action = removeStudent(student);
+    dispatch(action);
+    axios.delete('/api/students', {data: student})
+    .then(res => res.data)
+    .then(history.push('/students/'));
+  };
+}
+
+export function deleteCampus(campus, history) {
+  return function thunk(dispatch) {
+    const action = removeCampus(campus);
+    dispatch(action);
+    axios.delete('/api/campuses', {data: campus})
+    .then(res => res.data)
+    .then(history.push('/campuses/'));
+  };
+}
+
+
 
 //AJAX (FETCH)
 
@@ -318,6 +368,20 @@ export default function rootReducer(state = initialState, action) {
         return student.id == action.student.id
       })
       student = action.student
+      return newState;
+
+    case REMOVE_STUDENT:
+      let studentIndex = newState.students.findIndex((student) => {
+        return student.id == action.student.id
+      })
+      newState.students.splice(studentIndex, 1)
+      return newState;
+
+    case REMOVE_CAMPUS:
+      let campusIndex = newState.campuses.findIndex((campus) => {
+        return campus.id == action.campus.id
+      })
+      newState.campuses.splice(campusIndex, 1)
       return newState;
 
     default:

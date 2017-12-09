@@ -47,7 +47,11 @@ campusRouter.put('/', (req, res, next) => {
 });
 
 campusRouter.delete('/', (req, res, next) => {
-  Campuses.destroy({where: {id: req.body.id}})
+  Campuses.findById(req.body.id)
+  .then((campus) => {
+    return Campuses.destroy({where: {id: req.body.id}})
+    .then(() => res.send('Deleted'));
+  })
   .catch(next);
 });
 

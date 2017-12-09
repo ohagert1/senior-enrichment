@@ -21,7 +21,7 @@ const AddNewStudent = (props) => {
             name="firstName"
             placeholder="First Name"
             value={props.firstName}
-            onChange={props.OnFirstNameChange}
+            onChange={props.onFirstNameChange}
           />
       </div>
       <div className="form-group">
@@ -102,7 +102,7 @@ function mapDispatchToProps(dispatch, ownProps) {
       ownProps.history
       ))
     },
-    OnFirstNameChange: (event) => {
+    onFirstNameChange: (event) => {
       event.preventDefault();
       dispatch(writeFirstName(event.target.value))
     },

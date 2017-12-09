@@ -12,7 +12,7 @@ const CampusList = function(props) {
     <div>
       <h2>Campuses:</h2>
       <NavLink to='/campuses/add-new-campus'>
-      Add New Campus
+        <button>Add New Campus</button>
       </NavLink>
       <ul style={{listStyle: 'none'}}>
         {props.campuses.map((campus) => {
