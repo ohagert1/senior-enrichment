@@ -2,244 +2,256 @@
 import axios from 'axios';
 import react from 'react';
 import { combineReducers } from 'redux';
+import studentReducer from './studentReducer';
+import campusReducer from './campusReducer';
+import newCampusReducer from './newCampusReducer';
+import newStudentReducer from './newStudentReducer';
 
+const rootReducer = combineReducers({
+  campuses: campusReducer,
+  students: studentReducer,
+  newStudent: newStudentReducer,
+  newCampus: newCampusReducer
+});
 
+export default rootReducer;
+export * from './actionCreators';
 
 //WILL NEED TO REFACTOR WITH REACT-REDUX!
 
 //GET STUDENTS AND CAMPUSES
 
 
-const GET_STUDENTS = 'GET_STUDENTS';
+// const GET_STUDENTS = 'GET_STUDENTS';
 
-//UPDATE STUDENT
+// //UPDATE STUDENT
 
-const UPDATE_STUDENT = 'UPDATE_STUDENT';
+// const UPDATE_STUDENT = 'UPDATE_STUDENT';
 
-//ADD NEW STUDENT
+// //ADD NEW STUDENT
 
-const GET_STUDENT = 'GET_STUDENT';
-const WRITE_FIRST_NAME = 'WRITE_FIRST_NAME';
-const WRITE_LAST_NAME = 'WRITE_LAST_NAME';
-const WRITE_EMAIL = 'WRITE_EMAIL';
-const WRITE_GPA = 'WRITE_GPA';
-const WRITE_CAMPUS = 'WRITE_CAMPUS';
-
-
+// const GET_STUDENT = 'GET_STUDENT';
+// const WRITE_FIRST_NAME = 'WRITE_FIRST_NAME';
+// const WRITE_LAST_NAME = 'WRITE_LAST_NAME';
+// const WRITE_EMAIL = 'WRITE_EMAIL';
+// const WRITE_GPA = 'WRITE_GPA';
+// const WRITE_CAMPUS = 'WRITE_CAMPUS';
 
 
 
 
-//REMOVE STUDENT
-
-const REMOVE_STUDENT = 'REMOVE_STUDENT';
 
 
-//INITIAL STATE
+// //REMOVE STUDENT
 
-const initialState = {
-  campuses: [],
-  students: [],
-  newCampus: {
-    name: '',
-    imageUrl: '',
-    description: ''
-  },
-  newStudent: {
-    firstName: '',
-    lastName: '',
-    email: '',
-    gpa: 0,
-    campus: ''
-  }
-};
+// const REMOVE_STUDENT = 'REMOVE_STUDENT';
 
 
+// //INITIAL STATE
 
-
-export function getStudent(newStudent) {
-  return {
-    type: GET_STUDENT,
-    newStudent: newStudent
-  };
-}
-
-export function getStudents(students) {
-  return {
-    type: GET_STUDENTS,
-    students: students
-  };
-}
-
-export function writeFirstName(firstName) {
-  return {
-    type: WRITE_FIRST_NAME,
-    firstName: firstName
-  };
-}
-
-export function writeLastName(lastName) {
-  return {
-    type: WRITE_LAST_NAME,
-    lastName: lastName
-  };
-}
-
-export function writeEmail(email) {
-  return {
-    type: WRITE_EMAIL,
-    email: email
-  };
-}
-
-export function writeGPA(gpa) {
-  return {
-    type: WRITE_GPA,
-    gpa: gpa
-  };
-}
-
-export function updateStudent(student) {
-  return {
-    type: UPDATE_STUDENT,
-    student: student
-  };
-}
-
-export function removeStudent(student) {
-  return {
-    type: REMOVE_STUDENT,
-    student: student
-  };
-}
+// const initialState = {
+//   campuses: [],
+//   students: [],
+//   newCampus: {
+//     name: '',
+//     imageUrl: '',
+//     description: ''
+//   },
+//   newStudent: {
+//     firstName: '',
+//     lastName: '',
+//     email: '',
+//     gpa: 0,
+//     campus: ''
+//   }
+// };
 
 
 
-//THUNK CREATORS
 
-//POST
+// export function getStudent(newStudent) {
+//   return {
+//     type: GET_STUDENT,
+//     newStudent: newStudent
+//   };
+// }
 
+// export function getStudents(students) {
+//   return {
+//     type: GET_STUDENTS,
+//     students: students
+//   };
+// }
 
+// export function writeFirstName(firstName) {
+//   return {
+//     type: WRITE_FIRST_NAME,
+//     firstName: firstName
+//   };
+// }
 
-export function postNewStudent(student, history) {
-  return function thunk(dispatch) {
-    axios.post('/api/students', student.newStudentData)
-      .then(res => res.data)
-      .then(newStudent => {
-        const action = getStudent(newStudent);
-        dispatch(action);
-        history.push(`/students/${newStudent.id}`);
-      });
-  };
-}
+// export function writeLastName(lastName) {
+//   return {
+//     type: WRITE_LAST_NAME,
+//     lastName: lastName
+//   };
+// }
 
+// export function writeEmail(email) {
+//   return {
+//     type: WRITE_EMAIL,
+//     email: email
+//   };
+// }
 
+// export function writeGPA(gpa) {
+//   return {
+//     type: WRITE_GPA,
+//     gpa: gpa
+//   };
+// }
 
-//UPDATE
+// export function updateStudent(student) {
+//   return {
+//     type: UPDATE_STUDENT,
+//     student: student
+//   };
+// }
 
-export function putStudentUpdate (student, history) {
-  return function thunk(dispatch) {
-    axios.put('/api/students', student) //not student maybe? nested?
-    .then(res => res.data)
-    .then(student => {
-      const action = updateStudent(student);
-      dispatch(action);
-      history.push(`/students/${student.id}`);
-    });
-  };
-}
-
-
-
-//DELETE
-
-export function deleteStudent(student, history) {
-  return function thunk(dispatch) {
-    const action = removeStudent(student);
-    dispatch(action);
-    axios.delete('/api/students', {data: student})
-    .then(res => res.data)
-    .then(history.push('/students/'));
-  };
-}
-
-
-//AJAX (FETCH)
-
-export function fetchStudents () {
-  return function thunk(dispatch) {
-    axios.get('/api/students')
-    .then(res => res.data)
-    .then(students => {
-      const action = getStudents(students);
-      dispatch(action);
-    });
-  };
-}
+// export function removeStudent(student) {
+//   return {
+//     type: REMOVE_STUDENT,
+//     student: student
+//   };
+// }
 
 
-//REDUCER
 
-export default function rootReducer(state = initialState, action) {
+// //THUNK CREATORS
 
-  let newState = Object.assign({}, state);
+// //POST
 
-  switch(action.type) {
 
-    case GET_STUDENTS:
-      newState.students = newState.students.concat(action.students);
-      return newState;
 
-    case GET_STUDENT:
-      newState.students = newState.students.concat(action.newStudent);
-      newState.newStudent = {
-        firstName: '',
-        lastName: '',
-        email: '',
-        gpa: 0,
-        campus: ''
-      };
-      return newState;
+// export function postNewStudent(student, history) {
+//   return function thunk(dispatch) {
+//     axios.post('/api/students', student.newStudentData)
+//       .then(res => res.data)
+//       .then(newStudent => {
+//         const action = getStudent(newStudent);
+//         dispatch(action);
+//         history.push(`/students/${newStudent.id}`);
+//       });
+//   };
+// }
 
-    case WRITE_FIRST_NAME:
-      newState.newStudent.firstName = action.firstName;
-      return newState;
 
-    case WRITE_LAST_NAME:
-      newState.newStudent.lastName = action.lastName;
-      return newState;
 
-    case WRITE_EMAIL:
-      newState.newStudent.email = action.email;
-      return newState;
+// //UPDATE
 
-    case WRITE_GPA:
-      newState.newStudent.gpa = action.gpa;
-      return newState;
+// export function putStudentUpdate (student, history) {
+//   return function thunk(dispatch) {
+//     axios.put('/api/students', student) //not student maybe? nested?
+//     .then(res => res.data)
+//     .then(student => {
+//       const action = updateStudent(student);
+//       dispatch(action);
+//       history.push(`/students/${student.id}`);
+//     });
+//   };
+// }
 
-    case WRITE_CAMPUS:
-      newState.newStudent.campus = action.campus;
-      return newState;
 
-    case UPDATE_STUDENT:
-      let student = newState.students.find((student) => {
-        return student.id == action.student.id;
-      });
-      student = action.student;
-      return newState;
 
-    case REMOVE_STUDENT:
-      let studentIndex = newState.students.findIndex((student) => {
-        return student.id == action.student.id;
-      });
-      newState.students.splice(studentIndex, 1);
-      return newState;
+// //DELETE
 
-    default:
-      return state;
-  }
+// export function deleteStudent(student, history) {
+//   return function thunk(dispatch) {
+//     const action = removeStudent(student);
+//     dispatch(action);
+//     axios.delete('/api/students', {data: student})
+//     .then(res => res.data)
+//     .then(history.push('/students/'));
+//   };
+// }
 
-}
+
+// //AJAX (FETCH)
+
+// export function fetchStudents () {
+//   return function thunk(dispatch) {
+//     axios.get('/api/students')
+//     .then(res => res.data)
+//     .then(students => {
+//       const action = getStudents(students);
+//       dispatch(action);
+//     });
+//   };
+// }
+
+
+// //REDUCER
+
+// export default function rootReducer(state = initialState, action) {
+
+//   let newState = Object.assign({}, state);
+
+//   switch(action.type) {
+
+//     case GET_STUDENTS:
+//       newState.students = newState.students.concat(action.students);
+//       return newState;
+
+//     case GET_STUDENT:
+//       newState.students = newState.students.concat(action.newStudent);
+//       newState.newStudent = {
+//         firstName: '',
+//         lastName: '',
+//         email: '',
+//         gpa: 0,
+//         campus: ''
+//       };
+//       return newState;
+
+//     case WRITE_FIRST_NAME:
+//       newState.newStudent.firstName = action.firstName;
+//       return newState;
+
+//     case WRITE_LAST_NAME:
+//       newState.newStudent.lastName = action.lastName;
+//       return newState;
+
+//     case WRITE_EMAIL:
+//       newState.newStudent.email = action.email;
+//       return newState;
+
+//     case WRITE_GPA:
+//       newState.newStudent.gpa = action.gpa;
+//       return newState;
+
+//     case WRITE_CAMPUS:
+//       newState.newStudent.campus = action.campus;
+//       return newState;
+
+//     case UPDATE_STUDENT:
+//       let student = newState.students.find((student) => {
+//         return student.id == action.student.id;
+//       });
+//       student = action.student;
+//       return newState;
+
+//     case REMOVE_STUDENT:
+//       let studentIndex = newState.students.findIndex((student) => {
+//         return student.id == action.student.id;
+//       });
+//       newState.students.splice(studentIndex, 1);
+//       return newState;
+
+//     default:
+//       return state;
+//   }
+
+// }
 
 
 
