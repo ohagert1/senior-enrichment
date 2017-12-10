@@ -9,6 +9,7 @@ import {
         postNewStudent
       } from '../store';
 import React from 'react';
+import RaisedButton from 'material-ui/RaisedButton';
 
 const AddNewStudent = (props) => {
   return(
@@ -68,7 +69,7 @@ const AddNewStudent = (props) => {
           })}
           </select>
       </div>
-      <button type="submit">Submit</button>
+      <RaisedButton type="submit">Submit</RaisedButton>
     </form>
   );
 }

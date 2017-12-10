@@ -15,9 +15,10 @@ const Home = () => {
   return(
     <div>
       <h1>Welcome to Fullstack Intergalactic!</h1>
-      <img src="https://astrologyking.com/wp-content/uploads/andromeda-galaxy.jpg"/>
+      <img src="https://astrologyking.com/wp-content/uploads/andromeda-galaxy.jpg" width="100%"/>
     </div>
   )
+
 }
 
 export default Home;

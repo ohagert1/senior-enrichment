@@ -5,6 +5,8 @@ import { render } from 'react-dom';
 import { connect } from 'react-redux';
 import store, { deleteStudent } from '../store';
 import { NavLink } from 'react-router-dom';
+import RaisedButton from 'material-ui/RaisedButton';
+
 
 class SingleStudent extends Component {
   constructor(props) {
@@ -38,25 +40,25 @@ class SingleStudent extends Component {
           <h3>{this.student.name}</h3>
           <h4>GPA: {this.student.gpa}</h4>
           <NavLink to={`/students/${this.student.id}/update`}>
-            <button>Edit Student Info</button>
+            <RaisedButton>Edit Student Info</RaisedButton>
           </NavLink>
           <div>
-              <button onClick={this.onDeleteClick}>Delete Student</button>
+              <RaisedButton onClick={this.onDeleteClick}>Delete Student</RaisedButton>
             {
               this.state.deleting && (
                 <div>
                   <h4>Do you really want to delete {this.student.name}?</h4>
-                  <button onClick={() => {
+                  <RaisedButton onClick={() => {
                     this.props.onDeleteConfirm(this.student)
-                  }}>Delete</button>
-                  <button onClick={this.onCancel}>Cancel</button>
+                  }}>Delete</RaisedButton>
+                  <RaisedButton onClick={this.onCancel}>Cancel</RaisedButton>
                 </div>
                 )
             }
           </div>
           <h3>Campus:</h3>
           <NavLink to={`/campuses/${this.campus.id}`}>
-            <button>{this.campus.name}</button>
+            <RaisedButton>{this.campus.name}</RaisedButton>
           </NavLink>
         </div>
     );

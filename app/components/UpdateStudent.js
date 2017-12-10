@@ -2,6 +2,7 @@ import { Component } from 'react';
 import { connect } from 'react-redux';
 import store, { putStudentUpdate } from '../store';
 import React from 'react';
+import RaisedButton from 'material-ui/RaisedButton';
 
 export default class UpdateStudent extends Component {
 
@@ -100,7 +101,7 @@ export default class UpdateStudent extends Component {
               })}
               </select>
           </div>
-          <button type="submit">Submit Changes</button>
+          <RaisedButton type="submit">Submit Changes</RaisedButton>
         </form>
       );
     }

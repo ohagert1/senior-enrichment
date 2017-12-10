@@ -2,6 +2,7 @@ import { Component } from 'react';
 import { connect } from 'react-redux';
 import store, { putCampusUpdate } from '../store';
 import React from 'react';
+import RaisedButton from 'material-ui/RaisedButton';
 
 export default class UpdateCampus extends Component {
 
@@ -70,7 +71,7 @@ export default class UpdateCampus extends Component {
                 onChange={this.onImageChange}
               />
           </div>
-          <button type="submit">Submit Changes</button>
+          <RaisedButton type="submit">Submit Changes</RaisedButton>
         </form>
       );
     }

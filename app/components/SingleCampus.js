@@ -6,6 +6,27 @@ import { Provider, connect } from 'react-redux';
 import store, { deleteCampus } from '../store';
 import StudentsList from './StudentsList';
 import { NavLink } from 'react-router-dom';
+import RaisedButton from 'material-ui/RaisedButton';
+import {
+  blueGrey500,
+  grey300,
+  blueGrey50,
+  grey100,
+  grey500
+} from 'material-ui/styles/colors';
+import getMuiTheme from 'material-ui/styles/getMuiTheme';
+
+
+const muiTheme = getMuiTheme({
+  palette: {
+    primary1Color: blueGrey500,
+    primary2Color: blueGrey50,
+    textColor: grey300,
+    accent1Color: grey300,
+    accent2Color: grey100,
+    accent3Color: grey500,
+  }
+});
 
 class SingleCampus extends Component {
 
@@ -46,18 +67,18 @@ class SingleCampus extends Component {
             })}
           />
           <NavLink to={`/campuses/${this.campus.id}/update`}>
-          <button>Edit Campus Info</button>
+          <RaisedButton color={muiTheme.palette.primary2Color}>Edit Campus Info</RaisedButton>
           </NavLink>
           <div>
-              <button onClick={this.onDeleteClick}>Delete Campus</button>
+              <RaisedButton onClick={this.onDeleteClick}>Delete Campus</RaisedButton>
             {
               this.state.deleting && (
                 <div>
                   <h4>Do you really want to delete {this.campus.name}?</h4>
-                  <button onClick={() => {
+                  <RaisedButton onClick={() => {
                     this.props.onDeleteConfirm(this.campus)
-                  }}>Delete</button>
-                  <button onClick={this.onCancel}>Cancel</button>
+                  }}>Delete</RaisedButton>
+                  <RaisedButton onClick={this.onCancel}>Cancel</RaisedButton>
                 </div>
                 )
             }

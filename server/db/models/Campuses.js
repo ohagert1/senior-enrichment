@@ -19,14 +19,19 @@ const Campuses = db.define('Campuses', {
   imageUrl: {
     type: Sequelize.STRING,
     isURL: true,
-    allowNull: false,
-    defaultValue: 'https://www.binghamton.edu/admissions/img/hi-res/visit.jpg'
+    allowNull: false
   },
 
   description: {
     type: Sequelize.TEXT
   }
 
+});
+
+Campuses.beforeValidate((campus) => {
+  if(!campus.imageUrl) {
+    campus.imageUrl = "https://i.ytimg.com/vi/45bMZuOppIU/maxresdefault.jpg";
+  }
 });
 
 

@@ -1,6 +1,7 @@
 import { Component } from 'react';
 import { connect } from 'react-redux';
 import { postNewCampus, writeCampusName, writeCampusDescription, writeCampusImage } from '../store';
+import RaisedButton from 'material-ui/RaisedButton';
 import React from 'react';
 
 const AddNewCampus = (props) => {
@@ -39,7 +40,7 @@ const AddNewCampus = (props) => {
             onChange={props.onImageChange}
           />
       </div>
-      <button type="submit">Submit</button>
+      <RaisedButton type="submit">Submit</RaisedButton>
     </form>
   );
 }
