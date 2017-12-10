@@ -107,6 +107,7 @@ class Main extends Component {
             />
           </Switch>
         </main>
+        <img src="https://astrologyking.com/wp-content/uploads/andromeda-galaxy.jpg" width="100%"/>
       </div>
     );
   }

@@ -27,7 +27,7 @@ export function getStudent(newStudent) {
 
 export function clearStudent() {
   return {
-    type: CLEAR_STUDENT,
+    type: CLEAR_STUDENT
   };
 }
 

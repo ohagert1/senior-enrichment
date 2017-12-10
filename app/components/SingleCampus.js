@@ -102,6 +102,6 @@ const mapDispatchToProps = (dispatch, ownProps) => {
   }
 }
 
-const SingleCampusContainer = connect(mapStateToProps, mapDispatchToProps)(SingleCampus)
+const SingleCampusContainer = connect(null, mapDispatchToProps)(SingleCampus)
 
 export default SingleCampusContainer;

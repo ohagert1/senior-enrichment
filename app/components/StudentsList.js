@@ -10,20 +10,29 @@ import { connect } from 'react-redux';
 
 const StudentList = (props) => {
   return(
-  <div>
+  <div style={{textAlign: 'center'}}>
     <h1>Students:</h1>
     <NavLink to={'/students/add-new-student'}>
       <RaisedButton>Add New Student</RaisedButton>
     </NavLink>
     <List style={{listStyle: 'none'}}>
       {props.students.map((student) => {
+        student.deleting = false;
         return(
           <ListItem key={student.id}>
-          <NavLink to={`/students/${student.id}`}>
+          <NavLink className='navLink'to={`/students/${student.id}`} style={{textDecoration: 'none'}}>
               <h1>{student.name}
               </h1>
           </NavLink>
-          <RaisedButton className='raised-button' onClick={() => {props.onDelete(student)}}>Delete Student</RaisedButton>
+          <div style={{padding: '2em'}}>
+          <NavLink to={`/students/${student.id}/update`}>
+            <RaisedButton>Edit Student</RaisedButton>
+          </NavLink>
+          </div>
+          <div>
+          <RaisedButton className='raised-button' onClick={() => {
+            props.onDelete(student)}}>Delete Student</RaisedButton>
+          </div>
           </ListItem>
         )
         })
@@ -36,6 +45,7 @@ const StudentList = (props) => {
 function mapDispatchToProps(dispatch, ownProps) {
   return {
       onDelete: (student) => {
+        console.log(student.deleting)
         console.log(student);
         dispatch(deleteStudent(student, ownProps.history))
       }
