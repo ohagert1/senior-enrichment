@@ -55,6 +55,4 @@ campusRouter.delete('/', (req, res, next) => {
   }
 );
 
-
-
 module.exports = campusRouter;

@@ -1,8 +1,8 @@
 'use strict';
 
 import React, { Component } from 'react';
-import {render} from 'react-dom';
-import { Provider, connect } from 'react-redux';
+import { render } from 'react-dom';
+import { connect } from 'react-redux';
 import store, { deleteStudent } from '../store';
 import { NavLink } from 'react-router-dom';
 
@@ -34,9 +34,11 @@ class SingleStudent extends Component {
     if(this.student && this.campus) {
       return(
         <div>
+          <h2>Student:</h2>
           <h3>{this.student.name}</h3>
+          <h4>GPA: {this.student.gpa}</h4>
           <NavLink to={`/students/${this.student.id}/update`}>
-          Edit Student Info
+            <button>Edit Student Info</button>
           </NavLink>
           <div>
               <button onClick={this.onDeleteClick}>Delete Student</button>
@@ -52,9 +54,9 @@ class SingleStudent extends Component {
                 )
             }
           </div>
-          <h4>Campus:</h4>
+          <h3>Campus:</h3>
           <NavLink to={`/campuses/${this.campus.id}`}>
-          {this.campus.name}
+            <button>{this.campus.name}</button>
           </NavLink>
         </div>
     );

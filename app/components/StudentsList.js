@@ -4,6 +4,7 @@ import React, { Component } from 'react';
 import { NavLink } from 'react-router-dom';
 import {render} from 'react-dom';
 import store from '../store';
+import {List, ListItem} from 'material-ui/List';
 
 const StudentList = (props) => {
   return(
@@ -12,18 +13,19 @@ const StudentList = (props) => {
     <NavLink to={'/students/add-new-student'}>
       <button>Add New Student</button>
     </NavLink>
-    <ul style={{listStyle: 'none'}}>
+    <List style={{listStyle: 'none'}}>
       {props.students.map((student) => {
         return(
-          <li key={student.id}>
+          <ListItem key={student.id}>
           <NavLink to={`/students/${student.id}`}>
               <h2>{student.name}</h2>
           </NavLink>
-          </li>
+          <button>Delete Student</button>
+          </ListItem>
         )
         })
       }
-    </ul>
+    </List>
   </div>
   )
 }

@@ -1,3 +1,5 @@
+'use strict';
+
 import React, { Component } from 'react';
 import { Route, Switch, Redirect } from 'react-router-dom';
 import store, { fetchStudents, fetchCampuses } from '../store.js';
@@ -6,7 +8,6 @@ import Home from './Home';
 import StudentsList from './StudentsList';
 import CampusList from './CampusList';
 import Header from './Header';
-import Footer from './Footer';
 import SingleStudent from './SingleStudent';
 import SingleCampus from './SingleCampus';
 import AddNewCampus from './AddNewCampus';
@@ -16,12 +17,12 @@ import UpdateStudent from './UpdateStudent';
 import { Provider, connect } from 'react-redux';
 
 
+
 class Main extends Component {
 
   constructor() {
     super();
   }
-
 
 //GETS DATA FROM DB ON COMPONENT DID MOUNT
   componentDidMount () {
@@ -104,10 +105,8 @@ class Main extends Component {
               path="/"
               component={Home}
             />
-
           </Switch>
         </main>
-        <Footer />
       </div>
     );
   }

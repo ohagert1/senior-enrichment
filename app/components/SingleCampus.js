@@ -31,20 +31,22 @@ class SingleCampus extends Component {
   }
 
   render() {
-    this.campus = this.props.campuses.find((campus) => campus.id == this.props.match.params.id);
+    this.campus = this.props.campuses.find((campus) => {
+      return campus.id == this.props.match.params.id;
+    });
     if(this.campus) {
       return(
         <div>
-          <h3>{this.campus.name}</h3>
+          <h2>{this.campus.name}</h2>
           <img src={this.campus.imageUrl} style={{width: 50 + '%'}}/>
-          <p>{this.campus.description}</p>
+          <h3>{this.campus.description}</h3>
           <StudentsList
             students={this.props.students.filter((student) => {
               return student.CampusId == this.campus.id
             })}
           />
           <NavLink to={`/campuses/${this.campus.id}/update`}>
-          Edit Campus Info
+          <button>Edit Campus Info</button>
           </NavLink>
           <div>
               <button onClick={this.onDeleteClick}>Delete Campus</button>

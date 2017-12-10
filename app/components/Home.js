@@ -14,12 +14,8 @@ const Home = () => {
 
   return(
     <div>
-      <NavLink to="/campuses">
-        <h2>Campuses</h2>
-      </NavLink>
-      <NavLink to="/students">
-        <h2>Students</h2>
-      </NavLink>
+      <h1>Welcome to Fullstack Intergalactic!</h1>
+      <img src="https://astrologyking.com/wp-content/uploads/andromeda-galaxy.jpg"/>
     </div>
   )
 }

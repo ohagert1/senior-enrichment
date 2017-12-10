@@ -74,13 +74,8 @@ const AddNewStudent = (props) => {
 }
 
 function mapStateToProps(state, ownProps) {
-  console.log('ownProps',ownProps)
   return {
     campuses: state.campuses,
-    campusName: state.newCampus.name,
-    campusDescription: state.newCampus.description,
-    campusImage: state.newCampus.imageUrl,
-    history: ownProps.history
   }
 }
 
@@ -120,7 +115,7 @@ function mapDispatchToProps(dispatch, ownProps) {
     },
     onCampusChange: (event) => {
       event.preventDefault();
-      dispatch(writeCampus(event.target.value));
+      dispatch(writeCampus(event.target.value))
     }
   }
 }
