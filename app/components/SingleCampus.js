@@ -57,7 +57,7 @@ class SingleCampus extends Component {
     });
     if(this.campus) {
       return(
-        <div>
+        <div style={{textAlign: 'center'}}>
           <h2>{this.campus.name}</h2>
           <img src={this.campus.imageUrl} style={{width: 50 + '%'}}/>
           <h3>{this.campus.description}</h3>

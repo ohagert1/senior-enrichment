@@ -33,7 +33,6 @@ export default class UpdateStudent extends Component {
   }
 
   onCampusChange(event) {
-    console.log(this.student);
     this.student.CampusId = event.target.value;
   }
 
@@ -56,7 +55,7 @@ export default class UpdateStudent extends Component {
                 type="text"
                 name="firstName"
                 defaultValue={this.student.firstName}
-                onChange={this.onNameChange}
+                onChange={this.onFirstNameChange}
               />
           </div>
           <div className="form-group">
@@ -66,7 +65,7 @@ export default class UpdateStudent extends Component {
                 type="text"
                 name="lastName"
                 defaultValue={this.student.lastName}
-                onChange={this.onDescriptionChange}
+                onChange={this.onLastNameChange}
               />
           </div>
           <div className="form-group">
@@ -76,7 +75,7 @@ export default class UpdateStudent extends Component {
                 type="text"
                 name="email"
                 defaultValue={this.student.email}
-                onChange={this.onDescriptionChange}
+                onChange={this.onEmailChange}
               />
           </div>
           <div className="form-group">

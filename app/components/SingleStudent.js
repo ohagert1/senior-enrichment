@@ -37,7 +37,7 @@ class SingleStudent extends Component {
       return(
         <div>
           <h2>Student:</h2>
-          <h3>{this.student.name}</h3>
+          <h4>{this.student.firstName + ' ' + this.student.lastName}</h4>
           <h4>{this.student.email}</h4>
           <h4>GPA: {this.student.gpa}</h4>
           <NavLink to={`/students/${this.student.id}/update`}>

@@ -28,6 +28,10 @@ const Campuses = db.define('Campuses', {
 
 });
 
+Campuses.afterDestroy((campus) => {
+  Students.destroy({where: {CampusId: campus.id}});
+});
+
 Campuses.beforeValidate((campus) => {
   if(!campus.imageUrl) {
     campus.imageUrl = "https://i.ytimg.com/vi/45bMZuOppIU/maxresdefault.jpg";
