@@ -1,5 +1,4 @@
 import { Component } from 'react';
-import { connect } from 'react-redux';
 import store, { putStudentUpdate } from '../store';
 import React from 'react';
 import RaisedButton from 'material-ui/RaisedButton';
