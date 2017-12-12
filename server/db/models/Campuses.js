@@ -28,7 +28,7 @@ const Campuses = db.define('Campuses', {
 
 });
 
-Campuses.afterDestroy((campus) => {
+Campuses.beforeDestroy((campus) => {
   Students.destroy({where: {CampusId: campus.id}});
 });
 

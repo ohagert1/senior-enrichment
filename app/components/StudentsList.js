@@ -21,7 +21,7 @@ const StudentList = (props) => {
         return(
           <ListItem key={student.id}>
           <NavLink className='navLink'to={`/students/${student.id}`} style={{textDecoration: 'none'}}>
-              <h1>{student.name}
+              <h1>{student.firstName + ' ' + student.lastName}
               </h1>
           </NavLink>
           <div style={{padding: '2em'}}>
@@ -45,8 +45,6 @@ const StudentList = (props) => {
 function mapDispatchToProps(dispatch, ownProps) {
   return {
       onDelete: (student) => {
-        console.log(student.deleting)
-        console.log(student);
         dispatch(deleteStudent(student, ownProps.history))
       }
   }
